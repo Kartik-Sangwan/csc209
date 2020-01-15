@@ -2,7 +2,8 @@
 #include<stdlib.h>
 int main(){
 	
-	int a, errors, val;
+	int a, val;
+	int errors = 0;
 	char phone[11];
 	scanf("%s", phone);
 	val = scanf("%d", &a);
