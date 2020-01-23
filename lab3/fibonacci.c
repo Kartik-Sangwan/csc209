@@ -16,7 +16,22 @@
 
 /* Write your solution here */
 
-
+void fib(int **fib_sequence, int n){
+	*fib_sequence = malloc(sizeof(int) * n);
+	//int *sequence = *fib_sequence;
+	if (n == 0){
+		(*fib_sequence)[0] = 0;
+	} else if (n == 1) {
+		(*fib_sequence)[0] = 0;
+		(*fib_sequence)[1] = 1;
+	} else {
+		(*fib_sequence)[0] = 0;
+		(*fib_sequence)[1] = 1;
+		for(int i = 2; i < n ; i++) {
+			(*fib_sequence)[i] = (*fib_sequence)[i-1] + (*fib_sequence)[i-2];
+  		}
+	}
+}
 int main(int argc, char **argv) {
     /* do not change this main function */
     int count = strtol(argv[1], NULL, 10);
