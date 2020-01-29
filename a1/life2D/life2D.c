@@ -12,4 +12,19 @@ int main(int argc, char **argv) {
     }
 
     // TODO: Implement.
+    int rows = strtol(argv[1], NULL, 10);
+    int cols = strtol(argv[2], NULL, 10);
+    int states = strtol(argv[3], NULL, 10);
+    int i = 0;
+    int *board = malloc(sizeof(int) * rows * cols);
+    while(fscanf(stdin, "%d", &board[i]) != EOF){
+	i++;
+    }
+    for(int i = 0; i < states; i++){
+	print_state(board, rows, cols);
+	update_state(board, rows, cols);
+    }
+    free(board);
+    return 0;
 }
+
