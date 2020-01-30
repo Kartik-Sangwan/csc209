@@ -14,3 +14,22 @@
 
   Your main function should return 0, regardless of what is printed.
 */
+int main(int argc, char **argv){
+	if (argc == 3){
+		char *str1 = argv[1];
+		char *str2 = argv[2];
+		int equal = 1;
+		if (strlen(str1) == strlen(str2)){
+			for(int i = 0; i < strlen(str1) && equal = 1; i++){
+				if (str1[i] != str2[i]) equal = 0;
+			}
+			if (equal) printf("Same\n");
+			else printf("Different\n");
+		} else {
+			printf("Different\n");
+		}
+	} else {
+		printf("Invalid\n");
+	}
+	return 0;
+}

@@ -36,10 +36,11 @@ int main(int argc, char **argv) {
     }
     char greeting[20];
     char *name = argv[2];
-
-    // Your code goes here
-
-
+    int count = 0;
+    for(int i = 0; i < 19 && argv[1][i] != '\0'; i++) greeting[count++] = argv[1][i];
+    greeting[count++] = 32;
+    for(int i = 0; count < 19; i++) greeting[count++] = name[i];
+    greeting[19] = '\0';
     printf("%s\n", greeting);
     return 0;
 }

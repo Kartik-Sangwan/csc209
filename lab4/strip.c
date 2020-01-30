@@ -20,7 +20,17 @@
 */
 
 // Write the function strip_q_marks here
-
+int strip_q_marks(char *str){
+    int count = 0;
+    char last = 63;
+    for(int i = strlen(str) - 1; i>=0 && last == 63; i--){
+	if(str[i] != 63){
+		str[i+1] = '\0';
+		last = 65;
+	} else count++;
+    }
+    return count;
+}
 
 int main(int argc, char **argv) {
     // Do not change this main function.
