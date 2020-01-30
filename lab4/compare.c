@@ -20,7 +20,7 @@ int main(int argc, char **argv){
 		char *str2 = argv[2];
 		int equal = 1;
 		if (strlen(str1) == strlen(str2)){
-			for(int i = 0; i < strlen(str1) && equal = 1; i++){
+			for(int i = 0; i < strlen(str1) && equal == 1; i++){
 				if (str1[i] != str2[i]) equal = 0;
 			}
 			if (equal) printf("Same\n");
