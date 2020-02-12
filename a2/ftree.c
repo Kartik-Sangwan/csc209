@@ -135,17 +135,19 @@ void print_ftree(struct TreeNode *root) {
  */
 void deallocate_ftree (struct TreeNode *node) {
     // Your implementation here.
-    if (node->type == 'd'){
-	struct TreeNode *curr1 = node->contents;
-	struct TreeNode *curr2 = node->contents;
-	while(curr1 != NULL){
-	    curr1 = curr1->next;
-	    deallocate_ftree(curr2);
-	    curr2 = curr1;
-	}
+    if(node != NULL){
+	if (node->type == 'd'){
+	    struct TreeNode *curr1 = node->contents;
+	    struct TreeNode *curr2 = node->contents;
+	    while(curr1 != NULL){
+	        curr1 = curr1->next;
+	        deallocate_ftree(curr2);
+	        curr2 = curr1;
+	    }
+        }
+        free(node->fname);
+        free(node);
     }
-    free(node->fname);
-    free(node);
 }
 
 
