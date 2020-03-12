@@ -23,7 +23,7 @@ long num_reads, seconds;
 
 void handler(int code){
 	printf(MESSAGE, num_reads, seconds);
-	exit(0);
+	exit(1);
 }
 
 //	struct itimerval old, new;
