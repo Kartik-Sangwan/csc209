@@ -21,6 +21,22 @@ long num_reads, seconds;
  * Assume both of these arguments are correct.
  */
 
+void handler(int code){
+	printf(MESSAGE, num_reads, seconds);
+	exit(0);
+}
+
+//	struct itimerval old, new;
+//	new.it_interval.tv_sec = 0;
+//	new.it_interval.tv_usec = 0;
+//	new.it_value.tv_sec = 0;
+//	new.it_value.tv_usec = 0;
+//	if (setitimer( ITIMER_PROF, &new, &old,) < 0){
+//		return 0;
+//	} else {
+//		old.it_value.tv_sec;
+//	}
+
 int main(int argc, char **argv) {
     if (argc != 3) {
         fprintf(stderr, "Usage: time_reads s filename\n");
@@ -34,13 +50,23 @@ int main(int argc, char **argv) {
       exit(1);
     }
 
+    struct sigaction newact;
+    newact.sa_handler = handler;
+    newact.sa_flags = 0;
+    sigemptyset(&newact.sa_mask);
+    sigaction(SIGALRM, &newact, NULL);
+	alarm(seconds);
     /* In an infinite loop, read an int from a random location in the file,
      * and print it to stderr.
      */
     for (;;) {
 
-
-
+		int pos = 4*(rand()%100);
+		fseek(fp, pos, SEEK_SET);
+		int number;
+		fread(&number, sizeof(int), 1, fp);
+		num_reads++;
+    	fprintf(stderr, "%d\n", number);
 
     }
     return 1; // something is wrong if we ever get here!
