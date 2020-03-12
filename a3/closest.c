@@ -25,7 +25,9 @@ int main(int argc, char **argv) {
 	int ch = -1;
 	
     // TODO: Parse the command line arguments
-
+	if (argc != 5){
+		print_usage();
+	}
 	while ((ch = getopt(argc, argv, "f:d:")) != -1){
 
 		switch(ch) {
