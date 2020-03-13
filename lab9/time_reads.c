@@ -22,20 +22,9 @@ long num_reads, seconds;
  */
 
 void handler(int code){
-	printf(MESSAGE, num_reads, seconds);
+	fprintf(stdout, MESSAGE, num_reads, seconds);
 	exit(1);
 }
-
-//	struct itimerval old, new;
-//	new.it_interval.tv_sec = 0;
-//	new.it_interval.tv_usec = 0;
-//	new.it_value.tv_sec = 0;
-//	new.it_value.tv_usec = 0;
-//	if (setitimer( ITIMER_PROF, &new, &old,) < 0){
-//		return 0;
-//	} else {
-//		old.it_value.tv_sec;
-//	}
 
 int main(int argc, char **argv) {
     if (argc != 3) {
@@ -54,17 +43,25 @@ int main(int argc, char **argv) {
     newact.sa_handler = handler;
     newact.sa_flags = 0;
     sigemptyset(&newact.sa_mask);
-    sigaction(SIGALRM, &newact, NULL);
-	alarm(seconds);
+    sigaction(SIGPROF, &newact, NULL);
+
+	struct itimerval itimer;
+	itimer.it_value.tv_sec = seconds;
+	itimer.it_value.tv_usec = 0;
+	itimer.it_interval.tv_sec = 0;
+	itimer.it_interval.tv_usec = 0;
+	setitimer(ITIMER_PROF, &itimer, NULL);
     /* In an infinite loop, read an int from a random location in the file,
      * and print it to stderr.
      */
     for (;;) {
 
-		int pos = 4*(rand()%100);
+		int pos = sizeof(int)*(rand()%100);
 		fseek(fp, pos, SEEK_SET);
 		int number;
-		fread(&number, sizeof(int), 1, fp);
+		if (fread(&number, sizeof(int), 1, fp) != 1){
+			perror("fread");
+		}
 		num_reads++;
     	fprintf(stderr, "%d\n", number);
 
