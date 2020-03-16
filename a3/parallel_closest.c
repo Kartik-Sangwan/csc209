@@ -121,14 +121,16 @@ double closest_parallel(struct Point *p, int n, int pdmax, int *pcount) {
 
 		// Finding the minimum distance between the two left and right half of the array p.
 
-		double min_dist = 2147483647.0;
+		double min_dist;
 		for (int i = 0; i < 2; i++){
 			double temp_min;
 			if (read(pipe_fd[i][0], &temp_min, sizeof(double)) != sizeof(double)){
 				perror("Error reading from child.");
 				exit(1);
 			}
-			if (temp_min < min_dist) min_dist = temp_min;
+			if (i == 0) {
+				min_dist = temp_min;
+			} else if (temp_min < min_dist) min_dist = temp_min;
 		}
 
 		double delta = min_dist;
