@@ -1,0 +1,298 @@
+Script started on 2020-03-20 10:44:37-0400
+]0;sangwan2@wolf:/h/u14/c8/00/sangwan2/Desktop/csc209/sangwan2/lab10wolf:~/Desktop/csc209/sangwan2/lab10$ gdb randclient
+GNU gdb (Ubuntu 8.1-0ubuntu3.2) 8.1.0.20180409-git
+Copyright (C) 2018 Free Software Foundation, Inc.
+License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.  Type "show copying"
+and "show warranty" for details.
+This GDB was configured as "x86_64-linux-gnu".
+Type "show configuration" for configuration details.
+For bug reporting instructions, please see:
+<http://www.gnu.org/software/gdb/bugs/>.
+Find the GDB manual and other documentation resources online at:
+<http://www.gnu.org/software/gdb/documentation/>.
+For help, type "help".
+Type "apropos word" to search for commands related to "word"...
+Reading symbols from randclient...done.
+(gdb) l
+warning: Source file is more recent than executable.
+10      #ifndef PORT
+11        #define PORT 30000
+12      #endif
+13      
+14      #define MESSAGE "A stitch in time\r\n"
+15      #define TIMES 5 // number of times to send the message
+16      #define MINCHARS 3
+17      #define MAXCHARS 7
+18      
+19      
+(gdb) l
+20      void write_random_pieces(int soc, const char *message, int times);
+21      
+22      
+23      int main(int argc, char **argv) {
+24          if (argc != 2) {
+25              fprintf(stderr, "Usage: randclient hostname\n");
+26              exit(1);
+27          }
+28      
+29          int soc = connect_to_server(PORT, argv[1]);
+(gdb) break 23
+Breakpoint 1 at 0xc69: file randclient.c, line 23.
+(gdb) run 127.0.0.1
+Starting program: /h/u14/c8/00/sangwan2/Desktop/csc209/sangwan2/lab10/randclient 127.0.0.1
+
+Breakpoint 1, main (argc=2, argv=0x7fffffffea18) at randclient.c:24
+24          if (argc != 2) {
+(gdb) run 127.0.0.1
+The program being debugged has been started already.
+Start it from the beginning? (y or n) n
+Program not restarted.
+(gdb) run 127.0.0.1
+The program being debugged has been started already.
+Start it from the beginning? (y or n) y
+Starting program: /h/u14/c8/00/sangwan2/Desktop/csc209/sangwan2/lab10/randclient 127.0.0.1
+
+Breakpoint 1, main (argc=2, argv=0x7fffffffea18) at randclient.c:24
+24          if (argc != 2) {
+(gdb) n
+29          int soc = connect_to_server(PORT, argv[1]);
+(gdb) n
+31          write_random_pieces(soc, MESSAGE, TIMES);
+(gdb) n
+33          close(soc);
+(gdb) n
+34          return 0;
+(gdb) n
+35      }
+(gdb) n
+__libc_start_main (main=0x555555554c5a <main>, argc=2, argv=0x7fffffffea18, init=<optimized out>, fini=<optimized out>, rtld_fini=<optimized out>, stack_end=0x7fffffffea08)
+    at ../csu/libc-start.c:344
+344     ../csu/libc-start.c: No such file or directory.
+(gdb) n
+[Inferior 1 (process 62182) exited normally]
+(gdb) n
+The program is not being run.
+(gdb) q
+]0;sangwan2@wolf:/h/u14/c8/00/sangwan2/Desktop/csc209/sangwan2/lab10wolf:~/Desktop/csc209/sangwan2/lab10$ exit[K[K[K[Kgdb randclient
+GNU gdb (Ubuntu 8.1-0ubuntu3.2) 8.1.0.20180409-git
+Copyright (C) 2018 Free Software Foundation, Inc.
+License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.  Type "show copying"
+and "show warranty" for details.
+This GDB was configured as "x86_64-linux-gnu".
+Type "show configuration" for configuration details.
+For bug reporting instructions, please see:
+<http://www.gnu.org/software/gdb/bugs/>.
+Find the GDB manual and other documentation resources online at:
+<http://www.gnu.org/software/gdb/documentation/>.
+For help, type "help".
+Type "apropos word" to search for commands related to "word"...
+Reading symbols from randclient...done.
+(gdb) break 5
+Breakpoint 1 at 0xc69: file randclient.c, line 5.
+(gdb) run
+Starting program: /h/u14/c8/00/sangwan2/Desktop/csc209/sangwan2/lab10/randclient 
+
+Breakpoint 1, main (argc=1, argv=0x7fffffffea28) at randclient.c:24
+warning: Source file is more recent than executable.
+24          if (argc != 2) {
+(gdb) n
+25              fprintf(stderr, "Usage: randclient hostname\n");
+(gdb) n
+Usage: randclient hostname
+26              exit(1);
+(gdb) n
+[Inferior 1 (process 64047) exited with code 01]
+(gdb) n
+The program is not being run.
+(gdb) gdb randclient
+Undefined command: "gdb".  Try "help".
+(gdb) q
+]0;sangwan2@wolf:/h/u14/c8/00/sangwan2/Desktop/csc209/sangwan2/lab10wolf:~/Desktop/csc209/sangwan2/lab10$ gdb ranf[Kdclient
+GNU gdb (Ubuntu 8.1-0ubuntu3.2) 8.1.0.20180409-git
+Copyright (C) 2018 Free Software Foundation, Inc.
+License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.  Type "show copying"
+and "show warranty" for details.
+This GDB was configured as "x86_64-linux-gnu".
+Type "show configuration" for configuration details.
+For bug reporting instructions, please see:
+<http://www.gnu.org/software/gdb/bugs/>.
+Find the GDB manual and other documentation resources online at:
+<http://www.gnu.org/software/gdb/documentation/>.
+For help, type "help".
+Type "apropos word" to search for commands related to "word"...
+Reading symbols from randclient...done.
+(gdb) r[Kbreak[K[K[K[Kl
+Undefined command: "bl".  Try "help".
+(gdb) l
+warning: Source file is more recent than executable.
+10      #ifndef PORT
+11        #define PORT 30000
+12      #endif
+13      
+14      #define MESSAGE "A stitch in time\r\n"
+15      #define TIMES 5 // number of times to send the message
+16      #define MINCHARS 3
+17      #define MAXCHARS 7
+18      
+19      
+(gdb) l
+20      void write_random_pieces(int soc, const char *message, int times);
+21      
+22      
+23      int main(int argc, char **argv) {
+24          if (argc != 2) {
+25              fprintf(stderr, "Usage: randclient hostname\n");
+26              exit(1);
+27          }
+28      
+29          int soc = connect_to_server(PORT, argv[1]);
+(gdb) break 23
+Breakpoint 1 at 0xc69: file randclient.c, line 23.
+(gdb) run 172[K[K27.00.-[K0.1[1P.0.1[C[C[C[C
+Starting program: /h/u14/c8/00/sangwan2/Desktop/csc209/sangwan2/lab10/randclient 127.0.0.1
+
+Breakpoint 1, main (argc=2, argv=0x7fffffffea18) at randclient.c:24
+24          if (argc != 2) {
+(gdb) n
+29          int soc = connect_to_server(PORT, argv[1]);
+(gdb) s
+connect_to_server (port=50054, hostname=0x7fffffffeca9 "127.0.0.1") at socket.c:100
+100     int connect_to_server(int port, const char *hostname) {
+(gdb) n
+101         int soc = socket(PF_INET, SOCK_STREAM, 0);
+(gdb) n
+102         if (soc < 0) {
+(gdb) n
+109         addr.sin_family = PF_INET;
+(gdb) n
+111         addr.sin_port = htons(port);
+(gdb) n
+113         memset(&(addr.sin_zero), 0, 8);
+(gdb) n
+116         struct hostent *hp = gethostbyname(hostname);
+(gdb) n
+117         if (hp == NULL) {
+(gdb) n
+122         addr.sin_addr = *((struct in_addr *) hp->h_addr);
+(gdb) n
+125         if (connect(soc, (struct sockaddr *)&addr, sizeof(addr)) == -1) {
+(gdb) n
+126             perror("connect");
+(gdb) n
+connect: Connection refused
+127             exit(1);
+(gdb) n
+[Inferior 1 (process 64066) exited with code 01]
+(gdb) nn
+Undefined command: "nn".  Try "help".
+(gdb) n
+The program is not being run.
+(gdb) run[K[K[Kg[Kq
+]0;sangwan2@wolf:/h/u14/c8/00/sangwan2/Desktop/csc209/sangwan2/lab10wolf:~/Desktop/csc209/sangwan2/lab10$ gdb b[Krandclient
+GNU gdb (Ubuntu 8.1-0ubuntu3.2) 8.1.0.20180409-git
+Copyright (C) 2018 Free Software Foundation, Inc.
+License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.  Type "show copying"
+and "show warranty" for details.
+This GDB was configured as "x86_64-linux-gnu".
+Type "show configuration" for configuration details.
+For bug reporting instructions, please see:
+<http://www.gnu.org/software/gdb/bugs/>.
+Find the GDB manual and other documentation resources online at:
+<http://www.gnu.org/software/gdb/documentation/>.
+For help, type "help".
+Type "apropos word" to search for commands related to "word"...
+Reading symbols from randclient...done.
+(gdb) break 5
+Breakpoint 1 at 0xc69: file randclient.c, line 5.
+(gdb) run 127.0.01
+Starting program: /h/u14/c8/00/sangwan2/Desktop/csc209/sangwan2/lab10/randclient 127.0.01
+
+Breakpoint 1, main (argc=2, argv=0x7fffffffea18) at randclient.c:24
+warning: Source file is more recent than executable.
+24          if (argc != 2) {
+(gdb) run 127.0.01.1
+The program being debugged has been started already.
+Start it from the beginning? (y or n) y
+Starting program: /h/u14/c8/00/sangwan2/Desktop/csc209/sangwan2/lab10/randclient 127.0.0.1
+
+Breakpoint 1, main (argc=2, argv=0x7fffffffea18) at randclient.c:24
+24          if (argc != 2) {
+(gdb) n
+29          int soc = connect_to_server(PORT, argv[1]);
+(gdb) n
+31          write_random_pieces(soc, MESSAGE, TIMES);
+(gdb) s
+write_random_pieces (soc=3, message=0x5555555551e0 "A stitch in time\r\n", times=5) at randclient.c:42
+42      void write_random_pieces(int soc, const char *message, int times) {
+(gdb) n
+44          int message_len = strlen(message);
+(gdb) n
+45          int total_bytes = times * message_len;
+(gdb) n
+46          int current_byte = 0;
+(gdb) n
+48          while (current_byte < total_bytes) {
+(gdb) print()t)o)t)a)l)_)b)y)t)e)s)
+$1 = 90
+(gdb) print(total_bytes)[1P)[1P)[1P)[1P)[1P)[1P)[1P)[1P)[1P)[1P)[1P)x)[1P)c)u)r)r)e)n)t)_)b)y)t)e)e)s)
+No symbol "current_bytees" in current context.
+(gdb) print(current_bytees)[1Ps)
+No symbol "current_bytes" in current context.
+(gdb) print(current_bytes)[C[C[C[C[1P)
+$2 = 0
+(gdb) n
+49              int piece_size = rand() % (MAXCHARS - MINCHARS + 1) + MINCHARS;
+(gdb) n
+50              int bytes_left = total_bytes - current_byte;
+(gdb) n
+51              if (piece_size > bytes_left) {
+(gdb) n
+55              for (int i = 0; i < piece_size; i++) {
+(gdb) pn[K[Kn
+56                  piece[i] = message[(current_byte + i) % message_len];
+(gdb) n
+55              for (int i = 0; i < piece_size; i++) {
+(gdb) n
+56                  piece[i] = message[(current_byte + i) % message_len];
+(gdb) n
+55              for (int i = 0; i < piece_size; i++) {
+(gdb) n
+56                  piece[i] = message[(current_byte + i) % message_len];
+(gdb) n
+55              for (int i = 0; i < piece_size; i++) {
+(gdb) n
+56                  piece[i] = message[(current_byte + i) % message_len];
+(gdb) n 20
+55              for (int i = 0; i < piece_size; i++) {
+(gdb) n 20
+48          while (current_byte < total_bytes) {
+(gdb) n 20
+56                  piece[i] = message[(current_byte + i) % message_len];
+(gdb) print()p)i)e)c)e)
+$3 = "A\r\nimt"
+(gdb) print()m)e)s)s)a)g)e)
+$4 = 0x5555555551e0 "A stitch in time\r\n"
+(gdb) continu[K[K[K[K[K[K[Kn 40
+48          while (current_byte < total_bytes) {
+(gdb) n 40
+50              int bytes_left = total_bytes - current_byte;
+(gdb) n 40
+55              for (int i = 0; i < piece_size; i++) {
+(gdb) n 40
+59              current_byte += piece_size;
+(gdb) continue
+Continuing.
+[Inferior 1 (process 64235) exited normally]
+(gdb) q
+]0;sangwan2@wolf:/h/u14/c8/00/sangwan2/Desktop/csc209/sangwan2/lab10wolf:~/Desktop/csc209/sangwan2/lab10$ exit
+exit
+
+Script done on 2020-03-20 11:01:00-0400
