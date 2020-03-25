@@ -67,9 +67,31 @@ int read_from(int client_index, struct sockname *usernames) {
 
     int num_read = read(fd, &buf, BUF_SIZE);
     buf[num_read] = '\0'; 
-    if (num_read == 0 || write(fd, buf, strlen(buf)) != strlen(buf)) {
-        usernames[client_index].sock_fd = -1;
-        return fd;
+
+    if (usernames[client_index].username == NULL){
+
+        usernames[client_index].username = malloc(num_read);
+        strcpy(usernames[client_index].username, buf);
+        usernames[client_index].username[num_read - 1] = '\0';
+    } else {
+
+        char arr[BUF_SIZE];
+        strcpy(arr, usernames[client_index].username);
+        strcat(arr, ": ");
+        strcat(arr, buf);
+        
+        for (int i = 0; i < MAX_CONNECTIONS; i++){
+
+            if (usernames[i].sock_fd > -1) {
+                int fd_new = usernames[i].sock_fd;
+                if (num_read == 0 || write(fd_new, arr, strlen(arr)) != strlen(arr)) {
+                    usernames[client_index].sock_fd = -1;
+                    return fd;
+                }
+            }
+        }
+
+
     }
 
     return 0;
