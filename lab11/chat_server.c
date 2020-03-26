@@ -44,7 +44,6 @@ int accept_connection(int fd, struct sockname *usernames) {
         close(fd);
         exit(1);
     }
-
     usernames[user_index].sock_fd = client_fd;
     usernames[user_index].username = NULL;
     return client_fd;
@@ -71,7 +70,7 @@ int read_from(int client_index, struct sockname *usernames) {
     if (usernames[client_index].username == NULL){
 
         usernames[client_index].username = malloc(num_read);
-        strcpy(usernames[client_index].username, buf);
+        strncpy(usernames[client_index].username, buf, strlen(buf));
         usernames[client_index].username[num_read - 1] = '\0';
     } else {
 
@@ -79,11 +78,12 @@ int read_from(int client_index, struct sockname *usernames) {
         strcpy(arr, usernames[client_index].username);
         strcat(arr, ": ");
         strcat(arr, buf);
-        
+
         for (int i = 0; i < MAX_CONNECTIONS; i++){
 
+            int fd_new = usernames[i].sock_fd;
+
             if (usernames[i].sock_fd > -1) {
-                int fd_new = usernames[i].sock_fd;
                 if (num_read == 0 || write(fd_new, arr, strlen(arr)) != strlen(arr)) {
                     usernames[client_index].sock_fd = -1;
                     return fd;
@@ -182,6 +182,7 @@ int main(void) {
                 if (client_closed > 0) {
                     FD_CLR(client_closed, &all_fds);
                     printf("Client %d disconnected\n", client_closed);
+					free(usernames[index].username);
                 } else {
                     printf("Echoing message from client %d\n", usernames[index].sock_fd);
                 }
