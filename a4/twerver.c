@@ -11,7 +11,7 @@
 #include "socket.h"
 
 #ifndef PORT
-    #define PORT 50031
+    #define PORT 50055
 #endif
 
 #define LISTEN_SIZE 5
