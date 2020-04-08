@@ -501,7 +501,6 @@ void activate_client(struct client *c, struct client **active_clients_ptr, struc
 
     add_client(active_clients_ptr, c->fd, c->ipaddr);
     strncat((*active_clients_ptr)->username, c->inbuf, strlen(c->inbuf));
-	strncat(c->username, c->inbuf, strlen(c->inbuf));
 
     //Removing the client from the new_clients list.
     struct client **p;
@@ -518,10 +517,10 @@ void activate_client(struct client *c, struct client **active_clients_ptr, struc
     }
 
     // Creating a message for new user joining Twitter.
-    int size = strlen(" has just joined.\n") + 1 + strlen(c->username);
+    int size = strlen(" has just joined.\n") + 1 + strlen((*active_clients_ptr)->username);
     char msg[size]; 
     msg[0] = '\0'; 
-    strncat(msg, c->username, strlen(c->username));
+    strncat(msg, (*active_clients_ptr)->username, strlen((*active_clients_ptr)->username));
     strncat(msg, " has just joined.\n", strlen(" has just joined.\n"));
     printf("%s", msg);
     // Send the message to all the active clients.
