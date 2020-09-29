@@ -23,8 +23,8 @@ int main(int argc, char *argv[]) {
 
     printf("Generating %d random points with x- and y-coordinate range between %d and %d...\n", n, 0, RAND_MAX);
     for (int i = 0; i < n; i++) {
-        p[i].x = rand();
-        p[i].y = rand();
+        	p[i].x = rand();
+        	p[i].y = rand();
         // printf("P[%d] = (%d, %d)\n", i, p[i].x, p[i].y);
     }
 

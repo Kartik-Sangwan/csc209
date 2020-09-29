@@ -44,6 +44,10 @@ int accept_connection(int fd, struct sockname *usernames) {
         close(fd);
         exit(1);
     }
+    char *msg = "WELCOME TO THE DESI GOLMALL CHAT SERVER \n";
+	write(client_fd, msg, strlen(msg));
+	char *username = "Please enter your username:\n";
+	write(client_fd, username, strlen(username));
     usernames[user_index].sock_fd = client_fd;
     usernames[user_index].username = NULL;
     return client_fd;
@@ -83,7 +87,7 @@ int read_from(int client_index, struct sockname *usernames) {
 
             int fd_new = usernames[i].sock_fd;
 
-            if (usernames[i].sock_fd > -1) {
+            if (usernames[i].sock_fd > -1 && fd_new != fd) {
                 if (num_read == 0 || write(fd_new, arr, strlen(arr)) != strlen(arr)) {
                     usernames[client_index].sock_fd = -1;
                     return fd;

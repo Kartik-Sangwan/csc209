@@ -62,5 +62,8 @@ int main(int argc, char **argv) {
     // Calculate the result using the parallel algorithm.
     double result_p = closest_parallel(points_arr, n, pdepth, &pcount);
     printf("The smallest distance: is %.2f (total worker processes: %d)\n", result_p, pcount);
+	double brute_result = brute_force(points_arr, n);
+	printf("The smallest distance: is %.2f \n", brute_result);
+
     exit(0);
 }
