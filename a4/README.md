@@ -1,0 +1,2 @@
+# CHAT SERVER IN C
+Developed a chat server using C and used sockets to listen for connections. Multiple users could connect and send each other messages, follow one another. Application involved heavy usage of C file-descriptors, structures, PORTS, and client-server interactions such as buffering, storing and broadcasting the messages. To Use the server clone the repo and run the twerver.c file in one termianl and the socket.c file in another terminal connect two clients. And voila you can exchange messages.
